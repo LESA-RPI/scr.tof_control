@@ -1,0 +1,391 @@
+******************************************************************************
+*  IRMA MATRIX SDK 1.3.6.0 : release Mar 06, 2018                            *
+******************************************************************************
+- Added    : Class SensorUpdater for Firmware Release 3.X updates,
+             implementing a new downloading update via UIP.
+             This new update method is incompatible with Firmware 2.X sensors.
+             To convert between 2.X and 3.X, special software is required.
+- Added    : Class FileServer, optional integrated file server for updates
+             (any other http file server may be used alternatively).
+- Added    : New messages for reading out and erasing flash log entries.
+- Added    : New messages for reading out the update history.
+             
+******************************************************************************
+*  IRMA MATRIX SDK 1.3.5.0 : internal                                        *
+******************************************************************************
+- Fixed    : FirmwareController::performContainerUpdateDefaults() handling
+             of sensor groups.
+
+******************************************************************************
+*  IRMA MATRIX SDK 1.3.4.0 : release Dec 21, 2017                            *
+******************************************************************************
+- Added    : New Linux toolchain for bcm2708-linaro-raspbian-gnueabihf-gcc-4.8.3
+- Added    : New Linux toolchain for armv5te-linux-gnueabi-gcc-4.6.3
+- Added    : GetFirmwareFeatures message
+- Added    : Support for sensor production run 2.3
+- Improved : Added missing line break in sensor configuration report
+- Improved : Minor code cleanup in API demos
+
+******************************************************************************
+*  IRMA MATRIX SDK 1.3.2.0 : release Jul 18, 2017                            *
+******************************************************************************
+- Improved : Doxygen documentation
+- Improved : Source and header file cleanup
+- Added    : New Linux toolchain arm-fsl-linux-gnueabi-g++-4.4.4-glibc-2.11.1
+- Improved : Configuration parameters updated for counter pipeline version 2
+- Improved : Some more methods declared const
+- Fixed    : Crash in CAN-based firmware update
+
+******************************************************************************
+*  IRMA MATRIX SDK 1.3.1.0 : internal                                        *
+******************************************************************************
+- Added    : Configuration parameter set version 1.6
+
+******************************************************************************
+*  IRMA MATRIX SDK 1.2.8.0 : release Apr 13, 2017                            *
+******************************************************************************
+- Added    : New Linux toolchain i686-timesys-linux-gnu-gcc-4.4.1
+- Improved : Memory usage.
+
+******************************************************************************
+*  IRMA MATRIX SDK 1.2.7.0 : release Feb 03, 2017                            *
+******************************************************************************
+- Added    : New Linux toolchain builds of the library are provided in the SDK.
+- Added    : Firmware Container File (.d5fc) updated to work with DHCP.
+- Improved : Made Configuration Readout ('K' 0x12 'd' and 'K' 0x12 'g') more fault-tolerant.
+- Added    : Convenience script for API demos.
+- Improved : Performance.
+- Fixed    : Rare memory leaks.
+- Fixed    : Other small improvements.
+
+******************************************************************************
+*  IRMA MATRIX SDK 1.2.6.0 : release Oct 21, 2016                            *
+******************************************************************************
+- Added    : socketCAN support. First Linux release with CAN support.
+             The baud rate needs to be set to 125000 to match the sensor's.
+- Added    : socketCan Driver option to select can device other than can0.
+- Added    : Demo programs enhanced with socketCAN instructions.
+- Added    : Documentation regarding sensor diagnostics.
+  
+- Improved : SensorAPI memory usage
+- Improved : Other minor fixes
+
+******************************************************************************
+*  IRMA MATRIX SDK 1.2.5.0 : release Oct 11, 2016                            *
+******************************************************************************
+
+- Improved : Implementation of D5FC update methods changed to ensure
+             repeatibility of update
+
+******************************************************************************
+*  IRMA MATRIX SDK 1.2.4.1 : release Oct 03, 2016                            *
+******************************************************************************
+
+- Improved : Implementation of D5FC update methods changed to ensure
+             repeatibility of update
+- Added    : Sensor status reference
+- Fixed    : Erroneous usage of variable fa in demo OBC
+- Improved : D5FC file used in demo FirmwareUpdate updated to current standard
+- Added    : Extension of configuration parameters
+             * "ComponentGroup":"productionindex"
+             * "ComponentGroup":"productionid"
+- Changed  : Specification of configuration parameters
+             * "CountingGroup":"averagefilter"
+- Fixed    : Reading buffer overflow in method ParameterGroup::registerStringParameter
+- Fixed    : Memory leak in Aggregator (in case of a locked mutex)
+- Fixed    : Memory leak in method SignalFileDecoder::readTemperatureEvents
+
+******************************************************************************
+*  IRMA MATRIX SDK 1.2.3.0 : release Mar 12, 2016                            *
+******************************************************************************
+
+- Improved : Macro UNUSED introduced to demo sources to avoid compiler warnings
+- Improved : D5FC file used in demo FirmwareUpdate updated to current standard
+- Added    : New method Dist500Base::setUipTimeout
+- Added    : Extension of configuration parameters
+             "ImageGroup" added
+- Improved : Parameters of door clear feature
+             * Height now related to floor
+             * Constraints changed to avoid unnecessary restrictions
+- Added    : New count category types
+             * "wheelchair_and_stroller_01"
+             * "bike_01"
+- Fixed    : Method UffRecorder::processNewDebugData corrected to avoid possibly
+             missing normalization of picture number and timestamp in first
+             data packet
+- Fixed    : Method FileDecoder::reset corrected to avoid potential doubling
+             of group directories 
+             
+******************************************************************************
+*  IRMA MATRIX SDK 1.2.2.0 : release Aug 14, 2015                            *
+******************************************************************************
+
+- Improved : Sensor API tutorial updated to revision 10
+- Added    : New demo StartCounter
+- Changed  : SDK for Linux: Shared Sensor API libraries with static binding of
+             boost libraries
+- Changed  : SDK for Linux: Sensor API library for toolchain x86_64-linux-gnu-g++-4.5
+             replaced by Sensor API library for toolchain x86_64-linux-g++-4.6.3-glibc-2.15
+- Added    : SDK for Linux: Sensor API library for toolchain armv4t_ssv1
+- Added    : SDK for MS Windows: Project files and solution file for MS Visual Studio 2008
+- Added    : SDK for MS Windows: Sensor API library for MS Visual Studio 2012
+- Added    : SDK for MS Windows: Sensor API library for MS Visual Studio 2013
+- Improved : SDK for MS Windows: Boost libraries upgraded from version 1.46.1 
+             to version 1.57.0
+- Improved : Optional extension of installation mode data and related UFF storage
+             introduced
+- Fixed    : Installation mode controller: Potential access to already released
+             Dist500 objects by RequestThread avoided
+- Improved : UFF decoder uses 64-bit pointer to support files > 4GB
+- Fixed    : Method ChunkDecoder::readBytes corrected to avoid occasionally wrong decoding
+- Fixed    : UFF storage: Missing metadata added
+- Added    : New method ParameterGroup::getConfiguration
+
+******************************************************************************
+*  IRMA MATRIX SDK 1.2.1.0 : release Mar 27, 2015                            *
+******************************************************************************
+
+- Changed  : Communication firmware of sensor now excluded from D5FC update
+             by default
+- Improved : Memory consumption on D5FC file decoding reduced
+- Improved : Bad alloc exceptions on D5FC file decoding now catched
+- Added    : New method Dist500FirmwareContainerDecoder::getDist500FirmwareFileInfo
+- Fixed    : Memory leaks removed from UFF decoder classes
+- Fixed    : Missing Linux compatibility of demo OBC established
+- Fixed    : Wrong interpretation of status flags contained in pixel data
+             removed from aggregator classes
+- Improved : Pause of 20ms between broadcast transmissions added to
+             method UdpDriver::sendBroadcastMessage
+- Added    : Extension of configuration parameters
+             * "CountingGroup":"doortosensordistance"
+- Added    : New methods
+             * CounterController::broadcastStartCounting and
+             * CounterController::broadcastStopCounting
+- Added    : New UIP commands 'U' 0x20 'a' and 'U' 0x20 'l'
+
+******************************************************************************
+*  IRMA MATRIX SDK 1.2.0.0 : release Feb 13, 2015                            *
+******************************************************************************
+
+- Improved : Sensor API tutorial updated to revision 08a
+- Improved : Demo OBC added 
+- Improved : D5FC file used in demo FirmwareUpdate updated to current standard
+- Improved : Configuration manager harmonized with DIST500 firmware
+- Added    : DIST500 release 2 
+             Hardware specific copies of existing configuration parameters
+             in "FpgaPictureGroup" extended.
+             * "hdrfactorr2", equivalent to "hdrfactor"
+- Added    : Extension of configuration parameters
+             * "CountingGroup":"startactivationmode"
+             * "CountingGroup":"sabotageaggregation"
+             * "DoorGroup":"doorclearvolumewidthleft"
+             * "DoorGroup":"doorclearvolumewidthright"
+             * "DoorGroup":"doorclearvolumedepthin"
+             * "DoorGroup":"doorclearvolumedepthout"
+             * "DoorGroup":"doorclearvolumeheighttop"
+             * "DoorGroup":"doorclearvolumeheightbottom"
+- Changed  : Specification of configuration parameters
+             * "LoggerGroup":"consolethreshold"
+             * "CommunicationGroup":"statusledmode"
+- Improved : Methods to access configuration parameters updated and completed
+- Changed  : Special handling of configuration parameter
+             "LoggerGroup":"consolethreshold" introduced in method
+			 FirmwareController::performContainerParameterUpdate to enable
+			 update of parameter
+- Added    : Enumeration StatusLedMode extended by values "OperationMode1" and
+             "OperationMode2"			 
+- Fixed    : Prevent potential crash when collecting network bindings on Linux
+- Fixed    : Implementation of methods
+             * InstallationModeController::firePictureCallback and
+             * InstallationModeController::RequestThread::execute
+             corrected
+- Added    : Method Dist500Base::sendUipCommand reactivated and corrected
+- Added    : New UIP commands 'd' 0x10 'p' and 'd' 0x10 'r'
+
+******************************************************************************
+*  IRMA MATRIX SDK 1.1.0.0 : release Jul 23, 2014                            *
+******************************************************************************
+
+- Added    : DIST500 release 2 
+             New method Dist500::getSensorRevisionCode introduced
+- Added    : DIST500 release 2 
+             Sensor working mode normal_activated_mode added
+- Added    : DIST500 release 2 
+             New release is equipped with hall sensor intended for autonomous
+             activation and deactivation. Transmission of hall sensor state and
+             sensor working mode on change of value supported.
+             * New configuration parameter group "HallSensorGroup" was introduced
+               to enable control of hall sensor usage.
+             * New methods introduced.
+               ** DoorController::getHallSensorState
+               ** DoorController::setHallSensorState
+               ** DoorController::enableHallSensor
+               ** DoorController::disableHallSensor
+               ** DoorController::getHallSensorFunction
+               ** DoorController::setHallSensorFunction
+               ** DoorController::enableHallSensor
+               ** DoorController::enableHallSensor
+- Added    : DIST500 release 2 
+             Hardware specific copies of existing configuration parameters
+             in "FpgaPictureGroup" introduced.
+             * "minexpvr2",                equivalent to "minexpv"
+             * "maxexpvr2",                equivalent to "maxexpv"
+             * "temperaturecoefficientr2", equivalent to "temperaturecoefficient"
+- Added    : DIST500 release 2 
+             New method FirmwareController::firmwareFitsHardware or new method
+             FirmwareController::firmwareFitsHardwareForSensors should be called
+             before starting firmware update to verify that new firmware runs
+             on sensor.
+- Improved : DIST500 release 2 
+             On D5FC updates firmware-fits-hardware check is now done automatically.
+- Added    : Sensor statuses over_temperature_detected, over_temperature_active,
+             fpga_restart and power_fail added
+- Added    : Door clear function
+             This function is a new feature of DIST500 sensors available on
+             request.
+             * Function area statuses door_clear and door_not_clear added
+             * New configuration parameter "DoorGroup":"doorclearfunction"
+               introduced
+- Fixed    : Implementation of class UffDecoder corrected to avoid problems
+             on reading of large UFF files
+- Improved : Implementation of method Dist500Base::saveConfigurationToFlash
+             extended to enable return of OPERATION_FAILED on receiving of
+             error message
+- Fixed    : Implementation of method CounterController::setCountResults
+             corrected to avoid crash on call with count list longer than 16
+- Fixed    : Corrections made regarding registering and copying of configuration
+             parameter groups
+- Improved : Support of UTF-8 file names completed
+- Added    : Demos OnlinePictureProcessing und UffPictureProcessing added 
+- Improved : D5FC file used in demo FirmwareUpdate updated
+
+******************************************************************************
+*  IRMA MATRIX SDK 1.0.4.0 : release Jan 06, 2014                            *
+******************************************************************************
+
+- Improved : Sensor API tutorial updated to revision 07
+- Improved : D5FC file used in demo FirmwareUpdate updated
+- Fixed    : Missing implementation of already declared method BaseConfiguration::clear() added
+- Added    : Assignment operator as well as copy constructor added for classes BaseConfiguration, Dist500Configuration,
+             InMemoryConfiguration and LiveConfiguration
+- Improved : "\n" replaced by "endl" in cout statements of all demo source files affected because of buffer flush
+- Fixed    : Default value of parameter "ki" adapted to standard firmware DIST500_Application_1.5.0.186
+- Fixed    : Default value of parameter "ks" adapted to standard firmware DIST500_Application_1.5.0.186
+- Fixed    : Default value of parameter "kwinc" adapted to standard firmware DIST500_Application_1.5.0.186
+- Fixed    : Default value of parameter "hdrfactor" adapted to standard firmware DIST500_Application_1.5.0.186
+- Added    : Sensor status invalid_config added
+- Fixed    : Boost library header files of version 1.48 replaced by its pendants of version 1.46.1 to remove mismatch
+             with library files
+
+******************************************************************************
+*  IRMA MATRIX SDK 1.0.3.0 : release Nov 01, 2013                            *
+******************************************************************************
+
+- Improved : Demo CountResults extended 
+- Improved : Demo PowerManagement extended 
+- Improved : Demo DoorState extended 
+- Fixed    : Missing adaption to container update of hints (comments) given in demo source file "FirmwareUpdate.cpp" done
+- Added    : Finalizing statement "delete d5;" added to all demos creating Dist500 object by statement
+             "Dist500* d5 = new Dist500(s);". This measure was taken for the sake of good programming style
+- Fixed    : Memory leaks in Softing CAN driver and ICEF driver removed
+- Fixed    : Wrong skipped list entries (communication and FPGA firmware virtually always skipped) in
+             DIST500 container update result information
+- Fixed    : DIST500 container updates failed because of configuration parameters unknown to the Sensor API
+- Added    : Configuration version 3.00: parameters "fpgapicture":"hdrmode" and "fpgapicture":"hdrfactor" added
+- Changed  : Class Thread shifted from name space synchronization to name space threads
+
+******************************************************************************
+*  IRMA MATRIX SDK 1.0.2.0 : release Sep 26, 2013                            *
+******************************************************************************
+
+- Added    : IRMA MATRIX libraries for MSVC2008 tool chain added (build configurations DEBUG and RELEASE)
+- Fixed    : Minor corrections made to handling of configuration data
+- Changed  : Minimum value of parameter "yposition" adapted to standard firmware DIST500_Application_1.5.0.165
+- Changed  : Parameter defaults of integration time control adapted to standard firmware DIST500_Application_1.5.0.165
+- Fixed    : Default value of parameter "counteroverrunenable" adapted to standard firmware DIST500_Application_1.5.0.161
+- Fixed    : Error regarding parameter constraints in method UffDecoder::readSensorConfiguration removed
+- Added    : Class Dist500LiveConfiguration introduced
+- Improved : SensorInfoProvider is now additional base class of Dist500Configuration. As a result
+             Dist500Configuration object can be used as sensor info provider by constructor of class UffRecorder
+- Added    : Methods InstallationModeController::disableInstallationModeRetrigger and 
+             InstallationModeController::enableInstallationModeRetrigger added
+- Changed  : Source lines commented out in demo DriverManager erased
+- Fixed    : Memory leak in in methods UdpDriver::handle_receive and IcefDriver::receptionCallback removed
+- Improved : Demo FirmwareUpdate upgraded to container update
+- Improved : Parameter checkSensorConsistency of method FirmwareController::performContainerUpdate has now
+             default value true
+- Improved : Parameters "xwallleft" (left wall distance), "xwallright" (right wall distance) and "xposition"
+             (sensor distance within a group) may now be part of DIST500 firmware container files. Handling of
+             these parameters on container update is equivalent to grouping of sensors
+             (method FirmwareController::configureSensorGroup)
+- Fixed    : Update of configuration data is now skipped if DIST500 firmware container file does not contain
+             configuration data 
+- Fixed    : Error on call of updateContainerCallback in method FirmwareController::performContainerParameterUpdate removed
+- Fixed    : Reset of immanent configuration data now requires preceding call of method Configuration::unlockImmanentData
+- Fixed    : Errors regarding UTF-8 support removed
+- Fixed    : Implementation of method UffDecoder::readPictureAndData corrected with respect to door wing states
+- Improved : Method UffDecoder::readSensorConfiguration reimplemented. As a result runtime is reduced extremely
+- Added    : Finalizing call of method DriverManager::shutdownAllDrivers added to all demos calling method
+             DriverManager::createAndActivateDefaultDrivers. This measure was taken for the sake of compatibility
+             with Linux
+- Added    : Method DriverManager::shutdownAllDrivers added
+- Fixed    : Wrong percent values indicating progress during Flash EPROM erasure phase now avoided
+- Fixed    : Incompatibility with MSVC2010 tool chain eliminated in header file "Picture.h"
+- Improved : Optional timeout parameter added to methods Dist500Base::echoTest and Dist500Base::pingSensor
+- Improved : Qt classes removed from reference documentation and related header files not longer installed 
+
+******************************************************************************
+*  IRMA MATRIX SDK 1.0.1.0 : release May 04, 2013                            *
+******************************************************************************
+
+- Added    : IRMA MATRIX library IrmaMatrixDebug1 added to support build configurations of type DEBUG
+             using MSVC2010 tool chain
+- Improved : Parameter checkSensorConsistency added to variant of method FirmwareController::performContainerUpdate
+- Changed  : Type FirmwareController::SensorsList renamed to FirmwareController::Dist500List
+- Fixed    : Naming within enumeration CONTAINER_UPDATE_STATE corrected
+- Changed  : Useless method Dist500::getSensorStatus removed
+- Improved : Demos shifted to subdirectory "demos" to ease placing of user projects in document directory
+             of IRMA MATRIX SDK 
+- Improved : Hints regarding typed enumerations added to reference documentation
+- Fixed    : Start menu shortcut for "CHANGES.TXT" now removed by uninstaller
+
+******************************************************************************
+*  IRMA MATRIX SDK 1.0.0.1 : release Apr 26, 2013                            *
+******************************************************************************
+
+- Improved : Demos are now installed in user´s document directory. As a result Windows program directory 
+             is used as default installation directory as in version 0.9.9.3
+- Improved : Qmake quote function used in project include file "common.pri" to enable usage of installation
+             directories containing spaces
+- Improved : Useless files removed from directory "docs\html-reference\"
+- Improved : Header files not needed for usage of Sensor API removed from reference documentation
+
+******************************************************************************
+*  IRMA MATRIX SDK 1.0.0.0 : release Apr 25, 2013                            *
+******************************************************************************
+
+- Added    : FirmwareController methods to perform DIST500 container updates introduced
+- Added    : Parameters "counting":"counteroverrunenable" added
+- Improved : Transmission of a UIP command is automatically repeated if there is no response from the sensor.
+             Up to 3 transmissions are made before corresponding Sensor API method returns with sensor result
+             OPERATION_NO_REPLY
+- Improved : UIP sender address other than 252 useable
+- Improved : Linking to customer CAN drivers possible without rebuild of IRMA MATRIX library
+- Improved : Source-sink management changed from std::set to std::list to enable control of processing order
+             for the sinks
+- Added    : Reset of sensor statuses (CounterController::resetSensorStatuses)
+- Added    : Counter type start counter ("UipTypes.h": start_counter = 'T')
+- Added    : UTF-8 support for UffRecorder and UffDecoder
+- Fixed    : Several corrections made to static ICEF driver
+- Fixed    : Several corrections made to UffRecorder
+- Fixed    : Several corrections made to UffDecoder
+- Improved : Qt Creator project include file "common.pri" extended to support MSVC2010 tool chain
+- Fixed    : Several corrections made to demo source files
+- Changed  : Experimental support for Windows CE 5.0 x86 with MSVC2005 removed
+- Changed  : Default installation directory changed to "C:\iris-GmbH\IRMA_MATRIX_SDK-1.0.0.0\" to avoid
+             failure of file writing to Windows program directory on usage of demos
+- Added    : "CHANGES.TXT" and corresponding start menu shortcut are now installed
+
+******************************************************************************
+*  IRMA MATRIX SDK 0.9.9.3 : release Apr 16, 2012                            *
+******************************************************************************
