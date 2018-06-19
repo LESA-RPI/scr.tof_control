@@ -9,6 +9,7 @@
 #include "iris/dist500/Dist500.h"
 #include "iris/drivers/DriverManager.h"
 #include "iris/uff/UffRecorder.h"
+#include "socket.cpp/src/tcp/tcp_server.hpp"
 
 // namespace shortcuts
 using namespace iris::dist500;
@@ -45,7 +46,9 @@ double sumg=0;
 #else
 
 
-
+void print(Node *nd, string msg) {
+  cout<< nd->ip <<" : " << msg << std::endl;
+}
 
 int main()
 {
@@ -56,7 +59,13 @@ int main()
 	// // print list with some additional information to console
 	cout << al.size() << " sensor(s) found:\n";
 
+	int port = 1234;
+	tcp::server server(port);
+	server.OnMessage(print);
+	server.Listen();
 
+	//s.get_message();
+	/*
 	
 	// // create DIST500 instance
 	Sensor& s = dm.getSensorFor(SENSOR_URL);
@@ -90,10 +99,8 @@ int main()
 	// 	cout << "cat " << (int)(cc.categoryId) << ": in " << cc.boarding << " / out " << cc.alighting << endl;
 	// }
 	
-
+	*/
 	cout << "yay" << endl;
-	//dist->stopCounting();
-	//Sleep(500000);
 	
     dm.shutdownAllDrivers();
 	
