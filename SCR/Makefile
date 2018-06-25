@@ -3,7 +3,7 @@ toolchain = x86_64-linux-g++-4.6.3-glibc-2.15
 sockets = $(dir)/include/3rd_party/socket.cpp/src/
 
 test.cpp:
-	g++ test.cpp -w -D_GLIBCXX_USE_CXX11_ABI=0 \
+	g++ -o tof main.cpp -w -D_GLIBCXX_USE_CXX11_ABI=0 \
 	$(sockets)net/node.cpp \
 	$(sockets)net/socket_manager.cpp \
 	$(sockets)tcp/tcp_client.cpp \
