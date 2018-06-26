@@ -6,6 +6,7 @@
 
 int main() {	
 	SensorManager s("config.txt");
-	s.updateSensorData();
+	s.startUpdating();
+	while (true);
 	return 0;
 }

@@ -25,7 +25,7 @@ class SensorManager {
 			delete[] dists;
 		}
 
-		void updateSensorData() {
+		void startUpdating() {
 			
 			for (unsigned int i = 0; i < sensorURLs.size(); ++i) {
 
@@ -40,8 +40,15 @@ class SensorManager {
 
 			}
 
-			while (true) { };
+		}
 
+		void stopUpdating() {
+			for (unsigned int i = 0; i < sensorURLs.size(); ++i) {
+				dists[i]->setDoorState(2, 6, 0, 0);
+				dists[i]->stopCounting();
+				dists[i]->stopPictureAcquisision();
+				dists[i]->disableInstallationMode();
+			}
 		}
 
 	private:

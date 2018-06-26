@@ -12,7 +12,7 @@ class PictureProcessor: public PictureSink {
 
 		void saveData() {
 			std::stringstream ss;
-			ss << "output-" << sensorId << ".txt";
+			ss << "data/output-" << sensorId << ".txt";
 			std::ofstream myfile (ss.str().c_str());
 
 			for (int y = 0; y < 25; y++) {
@@ -48,7 +48,6 @@ class PictureProcessor: public PictureSink {
 				for (int x = 0; x < 20; x++)
 					for (int y = 0; y < 25; y++)
 						data[y][x] = pic->subPictures.distances.matrix[x][y].decoded.value*DATA_CORRECTION;
-
 				saveData();
 			}
 		}
