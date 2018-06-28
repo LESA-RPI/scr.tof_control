@@ -9,14 +9,17 @@ class SensorManager {
 		Sensor** sensors;
 		Dist500** dists;
 		PictureProcessor** procs;
+		std::vector<std::string>* data;
 
 	public:
-		SensorManager(const std::string& configFile) {
+		SensorManager(const std::string& configFile, std::vector<std::string>* data_) {
 			dm.createAndActivateDefaultDrivers();
 			readConfig(configFile);
 			sensors = new Sensor*[num_sensors];
 			dists = new Dist500*[num_sensors];
 			procs = new PictureProcessor*[num_sensors];
+			data_->resize(sensorURLs.size());
+			data = data_;
 		}
 
 		~SensorManager() {
@@ -31,7 +34,7 @@ class SensorManager {
 
 				sensors[i] = &dm.getSensorFor(sensorURLs[i]);
 				dists[i] = new Dist500(*sensors[i]);
-				procs[i] = new PictureProcessor(i);
+				procs[i] = new PictureProcessor(i, data);
 				procs[i]->PictureSink::attachSource(dists[i]);
 				dists[i]->setDoorState(2, 6, 100, 100);
 				dists[i]->startCounting();

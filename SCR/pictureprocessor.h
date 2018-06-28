@@ -7,7 +7,7 @@ class PictureProcessor: public PictureSink {
 
 	private:
 		int sensorId;
-		std::vector< std::vector<int> > data;
+		std::vector<std::string>* data;
 
 
 		void saveData() {
@@ -25,9 +25,9 @@ class PictureProcessor: public PictureSink {
 		}
 
 	public:
-		PictureProcessor(int id) {
+		PictureProcessor(int id, std::vector<std::string>* data_) {
 			sensorId=id;
-			data.resize(25, std::vector<int> (20, 0));
+			data = data_;
 			dataAcquired=false;
 		}
 
@@ -35,7 +35,7 @@ class PictureProcessor: public PictureSink {
 			return this->sensorId;
 		}
 
-		std::vector< std::vector<int> >& getData() {
+		std::vector<std::string>* getData() {
 			return this->data;
 		}
 
@@ -45,10 +45,14 @@ class PictureProcessor: public PictureSink {
 			if (!dataAcquired) {
 				Pic* pic = picture->getPicture();
 
+				std::stringstream ss;
+
 				for (int x = 0; x < 20; x++)
 					for (int y = 0; y < 25; y++)
-						data[y][x] = pic->subPictures.distances.matrix[x][y].decoded.value*DATA_CORRECTION;
-				saveData();
+						ss << pic->subPictures.distances.matrix[x][y].decoded.value*DATA_CORRECTION << ',';
+				
+				(*data)[sensorId] = ss.str();
+
 			}
 		}
 };
