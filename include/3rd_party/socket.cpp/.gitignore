@@ -1,0 +1,47 @@
+# Emacs related files
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+libsocket.cpp.so*
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+
+# Archives
+*.tar.gz
+*.tar
+*.tar.bz
+*.tar.bz2
+*.zip
+*.7z
