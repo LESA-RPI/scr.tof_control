@@ -15,18 +15,20 @@ void * loop(void * m)
     pthread_detach(pthread_self());
     std::vector<std::string>* sensor_data = new std::vector<std::string>;
 	SensorManager s("config.txt", sensor_data);
+
+
 	while(true){
 		srand(time(NULL));
 		std::string command = tcp.getMessage();
 		if(command != ""){
 			std::string data = s.getMessage(command);
 			if(data == ""){
-				data = "no data yet";
+				data = "error: no data yet (maybe run start_counting)";
 			}
 			tcp.Send(data);
 			tcp.clean();
 		}
-		//usleep(1000);
+		
 	}
 	tcp.detach();
 	delete [] sensor_data;

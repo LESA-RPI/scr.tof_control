@@ -53,13 +53,8 @@ class SensorManager {
 		}
 
 		void stopUpdating() {
+		this->startUpdating();
 			for (unsigned int i = 0; i < sensorURLs.size(); ++i) {
-
-				//if door has not been initalized it can not be closed
-				if(door_state[i] == false){
-					continue;
-				}
-
 				dists[i]->setDoorState(2, 6, 0, 0);
 				door_state[i] = false;
 				dists[i]->stopCounting();
@@ -69,6 +64,8 @@ class SensorManager {
 		}
 
 		std::string getMessage(std::string msg) {
+
+			
 
 			if(msg == "start_counting") {
 				this->startUpdating();
@@ -80,27 +77,30 @@ class SensorManager {
 				return "stopped counting";
 			}
 
+			else if(msg == "get_data_all"){
+				std::string data;
+				for(unsigned int i = 0; i <sensorURLs.size(); ++i) {
+					data += this->data->at(i);
+				}
+				return data;
+			}
+
 			else if(msg.substr(0,8) == "get_data"){
 				std::string sens_num = msg.substr(8);
-
-				if(sens_num == ""){
-					return "no sensor id given";
-				}
-
 				try{
 					int sens_id = std::stoi(sens_num);
 					if(sens_id >= 0 && sens_id < this->sensorURLs.size()){
 						return this->data->at(sens_id);
 					}
-
-					return "what u doin m80";
+					return "error: not a valid sensor id";
 				}
 				catch(std::exception &e){
-					return "not a valid sensor id";
+					return "error: not a valid sensor id";
 				}
-
 			}
-			return msg.substr(0,8);
+
+
+			return "error: not a valid command";
 
 		}
 
@@ -117,6 +117,7 @@ class SensorManager {
 			config.close();
 			num_sensors = sensorURLs.size();
 		}
+
 };
 
 // SensorManager& SensorManager::operator=(const SensorManager& s) {

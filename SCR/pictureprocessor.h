@@ -49,9 +49,11 @@ class PictureProcessor: public PictureSink {
 
 				for (int x = 0; x < 20; x++)
 					for (int y = 0; y < 25; y++)
-						ss << pic->subPictures.distances.matrix[x][y].decoded.value*DATA_CORRECTION << ',';
+						ss << (int)(pic->subPictures.distances.matrix[x][y].decoded.value*DATA_CORRECTION) << ',';
 				
-				(*data)[sensorId] = ss.str();
+				std::string picture = ss.str();
+				picture.pop_back();
+				(*data)[sensorId] = picture;
 
 			}
 		}
