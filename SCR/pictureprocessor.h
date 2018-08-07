@@ -43,15 +43,17 @@ class PictureProcessor: public PictureSink {
 		void processNewPicture(Picture *picture, unsigned long pictureIndex, unsigned long pictureIndexCount) {
 			if (!dataAcquired) {
 				Pic* pic = picture->getPicture();
-				bool all_zeros = false;
+				bool all_zeros = true;
 
-				for (int x = 0; x < 20; x++)
-					for (int y = 0; y < 25; y++)
-						if(pic->subPictures.distances.matrix[x][y].decoded.value*DATA_CORRECTION != 0){
+				for (int x = 0; x < 20; x++) { 
+					for (int y = 0; y < 25; y++) { 
+						data[y][x] = pic->subPictures.distances.matrix[x][y].decoded.value*DATA_CORRECTION;
+						if(data[y][x] != 0) { 
 							all_zeros = false;
 						}
-						data[y][x] = pic->subPictures.distances.matrix[x][y].decoded.value*DATA_CORRECTION;
-						
+					}
+				}
+
 				if(!all_zeros){
 					saveData();
 				}
