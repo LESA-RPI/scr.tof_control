@@ -9,7 +9,6 @@ class PictureProcessor: public PictureSink {
 		int sensorId;
 		std::vector< std::vector<int> > data;
 
-
 		void saveData() {
 			std::stringstream ss;
 			ss << "output-" << sensorId << ".txt";
@@ -44,11 +43,18 @@ class PictureProcessor: public PictureSink {
 		void processNewPicture(Picture *picture, unsigned long pictureIndex, unsigned long pictureIndexCount) {
 			if (!dataAcquired) {
 				Pic* pic = picture->getPicture();
+				bool all_zeros = false;
 
 				for (int x = 0; x < 20; x++)
 					for (int y = 0; y < 25; y++)
+						if(pic->subPictures.distances.matrix[x][y].decoded.value*DATA_CORRECTION != 0){
+							all_zeros = false;
+						}
 						data[y][x] = pic->subPictures.distances.matrix[x][y].decoded.value*DATA_CORRECTION;
-				saveData();
+						
+				if(!all_zeros){
+					saveData();
+				}
 			}
 		}
 };
