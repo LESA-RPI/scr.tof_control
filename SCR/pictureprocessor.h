@@ -11,8 +11,6 @@ class PictureProcessor: public PictureSink {
 
 
 		void saveData() {
-			// std::cout << "updating output-" << sensorId << ".txt" << std::endl;
-			
 			std::stringstream ss;
 			ss << "output-" << sensorId << ".txt";
 			std::ofstream myfile (ss.str().c_str());

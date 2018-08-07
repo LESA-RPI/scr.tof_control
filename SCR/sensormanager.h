@@ -1,7 +1,6 @@
 // STL includes
 #include "includes.h"
 
-
 class SensorManager {
 	private:
 		DriverManager& dm = DriverManager::getInstance();
@@ -28,7 +27,6 @@ class SensorManager {
 
 		void startUpdating() {
 			
-			#pragma omp parallel for
 			for (unsigned int i = 0; i < sensorURLs.size(); ++i) {
 
 				sensors[i] = &dm.getSensorFor(sensorURLs[i]);
@@ -38,7 +36,7 @@ class SensorManager {
 				dists[i]->setDoorState(2, 6, 100, 100);
 				dists[i]->startCounting();
 				dists[i]->startPictureAcquisision();
-				dists[i]->enableInstallationMode(InstallationModeController::Full8, 0, 0, 0, 0, 0);
+				dists[i]->enableInstallationMode(InstallationModeController::Full16, 0, 0, 0, 0, 0);
 
 			}
 
